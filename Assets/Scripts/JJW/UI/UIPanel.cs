@@ -11,13 +11,13 @@ public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHand
     private RectTransform m_dragRect;
 
     [SerializeField]
-    private UnityEvent<PointerEventData> onBeginDragEvt;
+    private UnityEvent<PointerEventData> m_onBeginDragEvt;
 
     [SerializeField]
-    private UnityEvent<PointerEventData> onDragEvt;
+    private UnityEvent<PointerEventData> m_onDragEvt;
 
     [SerializeField]
-    private UnityEvent<PointerEventData> onEndDragEvt;
+    private UnityEvent<PointerEventData> m_onEndDragEvt;
 
     public Canvas canvas
     {
@@ -45,12 +45,12 @@ public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHand
             enabled = false;
         }
 
-        onDragEvt.AddListener(OnDragMove);
+        m_onBeginDragEvt.AddListener(OnDragMove);
     }
 
     protected override void OnDisable()
     {
-        onDragEvt.RemoveListener(OnDragMove);
+        m_onDragEvt.RemoveListener(OnDragMove);
     }
 
     public void OnDragMove(PointerEventData eventData)
@@ -88,18 +88,18 @@ public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHand
     public void OnBeginDrag(PointerEventData eventData)
     {
         // ?: null이 아닌지 검사 후 함수 호출
-        onBeginDragEvt?.Invoke(eventData);
+        m_onBeginDragEvt?.Invoke(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         // ?: null이 아닌지 검사 후 함수 호출
-        onDragEvt?.Invoke(eventData);
+        m_onDragEvt?.Invoke(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         // ?: null이 아닌지 검사 후 함수 호출
-        onEndDragEvt?.Invoke(eventData);
+        m_onEndDragEvt?.Invoke(eventData);
     }
 }
