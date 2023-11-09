@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Canvas m_canvas;
+    private Vector2 m_canvasSize;
 
     [SerializeField]
     private RectTransform m_dragRect;
@@ -25,6 +26,7 @@ public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHand
             if (m_canvas == null)
             {
                 m_canvas = GetComponentInParent<Canvas>();
+                m_canvasSize = m_canvas.GetComponent<RectTransform>().sizeDelta;
             }
 
             return m_canvas;
@@ -53,7 +55,29 @@ public class UIPanel : UIBase, IPointerDownHandler, IBeginDragHandler, IDragHand
 
     public void OnDragMove(PointerEventData eventData)
     {
-        m_dragRect.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        Vector2 newPosition = m_dragRect.anchoredPosition + eventData.delta / canvas.scaleFactor;
+        Vector2 halfSize = 0.5f * m_dragRect.sizeDelta;
+        Vector2 halfCanvasSize = 0.5f * m_canvasSize;
+
+        if (newPosition.x - halfSize.x < -halfCanvasSize.x)
+        {
+            newPosition.x = -halfCanvasSize.x + halfSize.x;
+        }
+        else if (newPosition.x + halfSize.x > halfCanvasSize.x)
+        {
+            newPosition.x = halfCanvasSize.x - halfSize.x;
+        }
+
+        if (newPosition.y - halfSize.y < -halfCanvasSize.y)
+        {
+            newPosition.y = -halfCanvasSize.y + halfSize.y;
+        }
+        else if (newPosition.y + halfSize.y > halfCanvasSize.y)
+        {
+            newPosition.y = halfCanvasSize.y - halfSize.y;
+        }
+
+        m_dragRect.anchoredPosition = newPosition;
     }
 
     public void OnPointerDown(PointerEventData eventData)

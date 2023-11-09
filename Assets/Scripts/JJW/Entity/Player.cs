@@ -24,8 +24,6 @@ public class Player : Entity
 
     private void Move()
     {
-        int inputMask = 0;
-
         if (Input.GetKey(KeyCode.W))
         {
             rigidBody.AddForce(moveSpeed * transform.forward);
