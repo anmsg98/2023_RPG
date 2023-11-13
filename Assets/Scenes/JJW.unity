@@ -342,9 +342,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3819d0bdc5272d8479147f98d19f5be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hp: 0
-  m_moveSpeed: 0
-  m_maxMoveSpeed: 0
+  m_stat:
+    m_hp: 0
+    m_mp: 0
+    m_level: 0
+    m_exp: 0
+    m_maxExp: 0
+    m_moveSpeedCoef: 0
+    m_maxMoveSpeedCoef: 0
+    m_attackSpeedCoef: 0
+    m_maxAttackSpeedCoef: 0
 --- !u!1 &669870541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,9 +1353,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4483cdfdbe2c136419bcb26c9b9f4021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hp: 0
-  m_moveSpeed: 10
-  m_maxMoveSpeed: 5
+  m_stat:
+    m_hp: 0
+    m_mp: 0
+    m_level: 0
+    m_exp: 0
+    m_maxExp: 0
+    m_moveSpeedCoef: 0
+    m_maxMoveSpeedCoef: 0
+    m_attackSpeedCoef: 0
+    m_maxAttackSpeedCoef: 0
   m_rotationSpeed: 200
 --- !u!4 &2061227634052589133
 Transform:

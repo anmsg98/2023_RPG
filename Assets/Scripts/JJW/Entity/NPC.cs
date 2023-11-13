@@ -7,6 +7,6 @@ public class NPC : Entity
     protected override void Awake()
     {
         base.Awake();
-        m_interatctionArea = GetComponentInChildren<BoxCollider>();
+        m_interatctionArea = transform.GetComponentInChildren<BoxCollider>();
     }
 }
