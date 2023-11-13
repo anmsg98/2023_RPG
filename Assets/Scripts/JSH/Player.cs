@@ -9,6 +9,8 @@ using Vector3 = UnityEngine.Vector3;
 public class Player : MonoBehaviour
 {
     [SerializeField]
+    public static Player instance { get; set; }
+    
     private bool isRun = false;
 
     private bool isAttack = false;
@@ -20,8 +22,18 @@ public class Player : MonoBehaviour
     private Vector3 userInput;
     private Vector3 moveDirection;
     public float speed;
-    
-    // Start is called before the first frame update
+
+    public GameObject arrow;
+    public Transform bulletDis;
+
+    public GameObject fakeArrow;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
+
     void Start()
     {
     }
@@ -29,8 +41,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
         Attack();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void LateUpdate()
+    {
+        Rotate();
     }
 
     private void Move()
@@ -56,12 +77,6 @@ public class Player : MonoBehaviour
         }
 
         animator.SetBool("IS_RUN", userInput != Vector3.zero);
-       
-    }
-
-    private void LateUpdate()
-    {
-        Rotate();
     }
 
     void Rotate()
@@ -129,6 +144,9 @@ public class Player : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                Vector3 playerRotate = Vector3.Scale(Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerRotate),
+                    1000.0f * Time.deltaTime);
                 animator.SetTrigger("Attack");
                 isAttack = true;
             }
@@ -145,6 +163,22 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         isAttack = false;
     }
-    
 
+    void SponArrow()
+    {
+        fakeArrow.SetActive(true);
+    }
+    void ArrowAttack()
+    {
+        fakeArrow.SetActive(false);
+        bulletDis = GameObject.Find("Chloe").transform.GetChild(0).gameObject.transform;
+        GameObject bullet = Instantiate(arrow, bulletDis.transform);
+        Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
+        bulletRigid.velocity = bulletDis.forward * 2;
+    }
+
+    void DestroyArrow()
+    {
+        Weapon.instance.DestroyBullet();
+    }
 }
