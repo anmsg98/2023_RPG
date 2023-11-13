@@ -343,15 +343,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stat:
+    m_level: 0
     m_hp: 0
     m_mp: 0
-    m_level: 0
     m_exp: 0
     m_maxExp: 0
     m_moveSpeedCoef: 0
     m_maxMoveSpeedCoef: 0
+    m_attackDamage: 0
     m_attackSpeedCoef: 0
     m_maxAttackSpeedCoef: 0
+    m_criticalPercent: 0
+    m_armor: 0
+  m_status: {fileID: 0}
 --- !u!1 &669870541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,15 +1358,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stat:
+    m_level: 0
     m_hp: 0
     m_mp: 0
-    m_level: 0
     m_exp: 0
     m_maxExp: 0
-    m_moveSpeedCoef: 0
-    m_maxMoveSpeedCoef: 0
+    m_moveSpeedCoef: 5
+    m_maxMoveSpeedCoef: 10
+    m_attackDamage: 0
     m_attackSpeedCoef: 0
     m_maxAttackSpeedCoef: 0
+    m_criticalPercent: 0
+    m_armor: 0
+  m_status: {fileID: 0}
   m_rotationSpeed: 200
 --- !u!4 &2061227634052589133
 Transform:

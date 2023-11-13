@@ -316,6 +316,7 @@ public abstract class Entity : MonoBehaviour
         m_rigidBody = transform.GetComponent<Rigidbody>();
         m_animator = transform.GetComponent<Animator>();
         m_collider = transform.GetComponent<Collider>();
+        m_materials = new List<Material>();
 
         // 피격 이펙트를 위해 모든 메쉬의 머터리얼을 캐싱 해놓는다.
         MeshRenderer[] meshRenderers = transform.GetComponentsInChildren<MeshRenderer>();
