@@ -6,80 +6,32 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    [SerializeField]
-    public static Player instance { get; set; }
-    
-    private bool isRun = false;
-
-    private bool isAttack = false;
-    
-    public Rigidbody rigid;
-
-    public Animator animator;
-
     private Vector3 userInput;
     private Vector3 moveDirection;
-    public float speed;
-
-    public GameObject arrow;
-    public Transform bulletDis;
-
-    public GameObject fakeArrow;
-
-    private void Awake()
-    {
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
-    }
 
     void Start()
     {
+        isAttack = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Attack();
-    }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    private void LateUpdate()
-    {
-        Rotate();
-    }
-
-    private void Move()
+    public void Move()
     {
         userInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
         userInput.Normalize();
         
-        isRun = Input.GetKey(KeyCode.LeftShift);
-        
-        if (isRun)
-        {
-            animator.SetFloat("Speed", 1.2f);
-        }
-        else
-        {
-            animator.SetFloat("Speed", 0.8f);
-        }
-
-
         if (!isAttack && userInput != Vector3.zero) 
         {
-            rigid.MovePosition(transform.position + transform.forward * speed * (isRun ? 2.0f : 1.0f) * Time.deltaTime);
+            rigidBody.MovePosition(transform.position + transform.forward * moveSpeedCoef * Time.deltaTime);
         }
 
         animator.SetBool("IS_RUN", userInput != Vector3.zero);
     }
 
-    void Rotate()
+    public void Rotate()
     {
         if (!isAttack)
         {
@@ -138,22 +90,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Attack()
+    public virtual void Attack()
     {
-        if (!isAttack)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector3 playerRotate = Vector3.Scale(Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerRotate),
-                    1000.0f * Time.deltaTime);
-                animator.SetTrigger("Attack");
-                isAttack = true;
-            }
-        }
+      
     }
     
-    public void DisableAttack()
+    private void DisableAttack()
     {
         StartCoroutine("UnderAttack");
     }
@@ -162,23 +104,5 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         isAttack = false;
-    }
-
-    void SponArrow()
-    {
-        fakeArrow.SetActive(true);
-    }
-    void ArrowAttack()
-    {
-        fakeArrow.SetActive(false);
-        bulletDis = GameObject.Find("Chloe").transform.GetChild(0).gameObject.transform;
-        GameObject bullet = Instantiate(arrow, bulletDis.transform);
-        Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
-        bulletRigid.velocity = bulletDis.forward * 2;
-    }
-
-    void DestroyArrow()
-    {
-        Weapon.instance.DestroyBullet();
     }
 }
