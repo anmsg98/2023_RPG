@@ -9,11 +9,13 @@ using Vector3 = UnityEngine.Vector3;
 public class Player : Entity
 {
     private Vector3 userInput;
-    private Vector3 moveDirection;
+    private Vector3 playerRotate;
+    private bool isRotate;
 
     void Start()
     {
         isAttack = false;
+        isRotate = false;
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class Player : Entity
         
         if (!isAttack && userInput != Vector3.zero) 
         {
-            rigidBody.MovePosition(transform.position + transform.forward * moveSpeedCoef * Time.deltaTime);
+            rigidBody.MovePosition(transform.position + playerRotate * moveSpeedCoef * Time.deltaTime);
         }
 
         animator.SetBool("IS_RUN", userInput != Vector3.zero);
@@ -37,7 +39,7 @@ public class Player : Entity
         {
             if (Input.GetKey(KeyCode.W))
             {
-                Vector3 playerRotate = Vector3.Scale(Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
+                playerRotate = Vector3.Scale(Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
                 if (Input.GetKey(KeyCode.D))
                 {
                     playerRotate = Vector3.Scale(Camera.main.transform.forward + Camera.main.transform.right,
@@ -54,7 +56,7 @@ public class Player : Entity
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                Vector3 playerRotate = Vector3.Scale(-Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
+                playerRotate = Vector3.Scale(-Camera.main.transform.forward, new Vector3(1.0f, 0, 1.0f));
                 if (Input.GetKey(KeyCode.D))
                 {
                     playerRotate = Vector3.Scale(-Camera.main.transform.forward + Camera.main.transform.right,
@@ -71,13 +73,13 @@ public class Player : Entity
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                Vector3 playerRotate = Vector3.Scale(Camera.main.transform.right, new Vector3(1.0f, 0, 1.0f));
+                playerRotate = Vector3.Scale(Camera.main.transform.right, new Vector3(1.0f, 0, 1.0f));
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerRotate),
                     10.0f * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.A))
             {
-                Vector3 playerRotate = Vector3.Scale(-Camera.main.transform.right, new Vector3(1.0f, 0, 1.0f));
+                playerRotate = Vector3.Scale(-Camera.main.transform.right, new Vector3(1.0f, 0, 1.0f));
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerRotate),
                     10.0f * Time.deltaTime);
             }

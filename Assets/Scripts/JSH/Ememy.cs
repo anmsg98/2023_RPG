@@ -26,6 +26,14 @@ public class Ememy : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+        {
+            StartCoroutine("Hit");
+        }
+    }
+
     IEnumerator Hit()
     {
         Color color = new Color(1f, 0f, 0f);
