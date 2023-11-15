@@ -1,39 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     public static Weapon instance { get; set; }
-    private bool isDestroy = false;
+    public bool isDestroy = false;
+    public int weaponType;
+    public ParticleSystem explode;
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(gameObject);
+        instance = this;
     }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void DisChargeBow()
-    {
-       
-    }
-
-    public void DestroyBullet()
+    public IEnumerator DestroyBullet(float time)
     {
         if (!isDestroy)
         {
-            Destroy(gameObject, .5f);
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
         }
     }
 
@@ -41,8 +27,21 @@ public class Weapon : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            if (weaponType == 1)
+            {
+                explode.Play();
+            }
+
             isDestroy = true;
-            Destroy(gameObject);
+            Invoke("DisableBullet", .7f);
         }
     }
+
+    private void DisableBullet()
+    {
+        gameObject.SetActive(false);
+    }
+    
+    
+    
 }
