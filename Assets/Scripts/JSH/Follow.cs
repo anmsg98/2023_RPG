@@ -35,7 +35,7 @@ public class Follow : MonoBehaviour
     private void Update()
     {
         rotation.x += -(Input.GetAxis("Mouse Y")) * mouseSensitivity * Time.deltaTime;
-        rotation.x = Mathf.Clamp(rotation.x, 0f, maxAngle);
+        rotation.x = Mathf.Clamp(rotation.x, -70f, maxAngle);
         rotation.y += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0.0f);
     }
