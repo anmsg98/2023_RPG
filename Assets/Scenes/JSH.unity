@@ -168,8 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectPooler: {fileID: 1024740414}
-  charactorName:
-  - Chloe
 --- !u!1 &604767259
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 604767259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 50, y: 1, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -369,8 +367,8 @@ MonoBehaviour:
   realCamera: {fileID: 1771709702}
   dirNormalized: {x: 0, y: 0, z: 0}
   finalDir: {x: 0, y: 0, z: 0}
-  minDistance: 0.4
-  maxDistance: 0.5
+  minDistance: 2.5
+  maxDistance: 3.5
   finalDistance: 0
   smoothness: 5
 --- !u!4 &1593613856 stripped
@@ -471,8 +469,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595258934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.785, z: 1}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 1.517, z: 2.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -583,7 +581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771709699}
   m_LocalRotation: {x: 0.1115556, y: 0, z: 0, w: 0.9937582}
-  m_LocalPosition: {x: 0, y: 0.5, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -870,6 +868,18 @@ PrefabInstance:
     - target: {fileID: 2169893370796880843, guid: 396f544a1f5f42f468c49704dd6979e3, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169893370796880843, guid: 396f544a1f5f42f468c49704dd6979e3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169893370796880843, guid: 396f544a1f5f42f468c49704dd6979e3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169893370796880843, guid: 396f544a1f5f42f468c49704dd6979e3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2169893370796880843, guid: 396f544a1f5f42f468c49704dd6979e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1520,7 +1530,7 @@ MonoBehaviour:
     m_mp: 0
     m_exp: 0
     m_maxExp: 0
-    m_moveSpeedCoef: 2
+    m_moveSpeedCoef: 20
     m_maxMoveSpeedCoef: 0
     m_attackDamage: 0
     m_attackSpeedCoef: 0

@@ -25,7 +25,7 @@ public class SkillController : MonoBehaviour
                 bullet.transform.rotation = Quaternion.Euler(90, player.transform.rotation.eulerAngles.y, 0);
                 bullet.SetActive(true);
                 Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = bulletDir.forward * 2;
+                bulletRigid.velocity = bulletDir.forward * 20;
                 StartCoroutine(bullet.GetComponent<Weapon>().DestroyBullet(1f));
             }
             else if (skillnum == 1)
@@ -38,7 +38,7 @@ public class SkillController : MonoBehaviour
                     bullet.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y + (i * 20), 0);
                     bullet.SetActive(true);
                     Rigidbody bulletRigid = bullet.GetComponent<Rigidbody>();
-                    bulletRigid.velocity = bullet.transform.forward * 2;
+                    bulletRigid.velocity = bullet.transform.forward * 20;
                     if (!Weapon.instance.isDestroy)
                     {
                         StartCoroutine(bullet.GetComponent<Weapon>().DestroyBullet(1.7f));
@@ -64,7 +64,7 @@ public class SkillController : MonoBehaviour
                     GameObject bullet = m_objectPooler.getObject(3);
                     bullet.transform.position = player.transform.position;
                     bullet.transform.rotation = Quaternion.Euler(0, player.transform.rotation.eulerAngles.y + (i * 45), 0);
-                    bullet.transform.position += bullet.transform.forward * 1f;
+                    bullet.transform.position += bullet.transform.forward * 5f;
                     bullet.SetActive(true);
                     StartCoroutine(bullet.GetComponent<Weapon>().DestroyBullet(1f));
                 }
